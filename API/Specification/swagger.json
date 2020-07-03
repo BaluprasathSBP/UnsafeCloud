@@ -1,0 +1,123 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample Blog server where the comments manipulation occurs.",
+    "version": "1.0.0",
+    "title": "Comments Store",
+    "contact": {
+      "email": "prasath.balu13@gmail.com"
+    }
+  },
+  "host": "petstore.swagger.io",
+  "basePath": "/v2",
+  "tags": [
+    {
+      "name": "comment",
+      "description": "Everything about blog comments"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/comment": {
+      "post": {
+        "tags": [
+          "comment"
+        ],
+        "summary": "Add a new comment for the blog",
+        "description": "",
+        "operationId": "addComment",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "comment"
+        ],
+        "summary": "Finds comment by parent id",
+        "description": "Commnents will be provided based on the parent Id",
+        "operationId": "findcommentById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parentId",
+            "in": "query",
+            "description": "value that need to be considered for filter",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Comment"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parent value"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Comment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "guid"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "parentId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "blogId": {
+          "type": "string",
+          "format": "guid"
+        },
+        "whenCreated": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
