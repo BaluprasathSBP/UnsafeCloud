@@ -6,13 +6,15 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const {startDatabase} = require('./DB/mongodb');
-const {insertComment, getComments} = require('./Service/comment');
+const { startDatabase } = require('./DB/mongodb');
+const { insertComment, getComments } = require('./Service/comment');
 var swaggerUi = require('swagger-ui-express'),
-swaggerDocument = require('./Specification/swagger.json');
+  swaggerDocument = require('./Specification/swagger.json');
 const commentAPI = require('./Controllers/Comment/comment');
 var methodOverride = require('method-override')
 
+const PORT = 3000;
+const HOST = '0.0.0.0';
 
 // defining the Express app
 const app = express();
@@ -38,27 +40,26 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/comment', commentAPI);
 
 
+// Intital API
+
+app.get('/', function (req, res) {
+  res.send('You are in the Unsafecloud comments API');
+});
 
 
 
 
-
-  // start the in-memory MongoDB instance
-startDatabase().then(async () => {    
-    await insertComment({comment: 'Hello, now from the in-memory database!',parentId:'eadf-ghtere121kj-j212kjk',blogId:'eadf-ghtere121kj-j212kjk'});
-    console.log(await getComments());
-    const handleErrors = (err, req, res, next) => {
-    
-        debugger;
-          return res.status(500).json({
-            status: 'error',
-            message: err.message
-          });
-        }
-      
-        app.use(handleErrors);
-      // start the server
-      app.listen(3001, async () => {
-        console.log('listening on port 3001');
-      });
+// start the in-memory MongoDB instance
+startDatabase().then(async () => {
+  await insertComment({ comment: 'Hello, now from the in-memory database!', parentId: 'eadf-ghtere121kj-j212kjk', blogId: 'eadf-ghtere121kj-j212kjk' });
+  const handleErrors = (err, req, res, next) => {
+    return res.status(500).json({
+      status: 'error',
+      message: err.message
     });
+  }
+
+  app.use(handleErrors);
+  // start the server
+  app.listen(PORT, HOST);
+});
