@@ -9,7 +9,8 @@
     background-color:rgb(240, 230, 230);   
     align-items: stretch;    
     align-content: flex-start; 
-    padding-left: 5%;  
+    padding-top: 0.5%;
+    padding-left: 1%;  
     padding-right: 5%;  
 }
 
