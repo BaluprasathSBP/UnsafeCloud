@@ -1,0 +1,40 @@
+
+.BlogBody
+{
+    height: auto;    
+    display: flex;   
+    flex-direction: column;    
+    justify-content: flex-start;     
+    align-items: stretch;    
+    align-content: flex-start; 
+    margin: 5% 5% 2% 5%;
+    padding-left: 5%;  
+    padding-right: 5%;  
+    padding-top: 0%;
+    padding-bottom: 1%;
+    background-color:aqua;   
+    border-radius: 20px;
+    
+}
+.CommentsHeader
+{
+    padding-top: 1%;
+    padding-bottom: 1%;
+    font-size: large;
+}
+.BlogText
+{     
+    flex-wrap: wrap;
+    text-align: left;
+    font-size: 16px;   
+    color: black;
+    flex-basis: 1;
+    padding-bottom: 1%;
+}
+
+.CommentContent
+{
+    padding-left:2%;
+}
+
+ 
