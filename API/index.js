@@ -41,13 +41,10 @@ app.use('/comment', commentAPI);
 
 
 // Intital API
-
 app.get('/', function (req, res) {
+  debugger;
   res.send('You are in the Unsafecloud comments API');
 });
-
-
-
 
 // start the in-memory MongoDB instance
 startDatabase().then(async () => {

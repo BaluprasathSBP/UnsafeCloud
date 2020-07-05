@@ -28,10 +28,9 @@ commentRouter.get('/', async (req, res, next) => {
 
 // Add new comment
 commentRouter.post('/', async (req, res, next) => {
-    try {
+    try {       
         var comment = req.body;
-        if(comment)
-        {
+        if (!(comment && comment.blogId && comment.parentId && comment.comment)) {
             res.status(400).json("Please validate the input content");
         }
         res.status(200).json(await insertComment(comment));

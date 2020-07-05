@@ -1,19 +1,14 @@
 const { getDatabase } = require('../DB/mongodb');
 const commentModel = require('../Models/comment');
-const mongoose = require('mongoose');
-
-const collectionName = 'comments';
 
 // Add new comment
 async function insertComment(comment) {
-  debugger;
-  await commentModel.create(comment);
+  return await commentModel.create(comment);
 }
 
 // Get all comments
 async function getComments() {
-  debugger;
-  return await commentModel.find();
+  return await commentModel.find().sort({ whenCreated: -1 });
 }
 
 // Get comments for the parent Id

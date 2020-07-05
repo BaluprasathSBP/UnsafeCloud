@@ -4,7 +4,6 @@ import Comment from '../Comments/Comment';
 import * as Constants from '../../Constants/index';
 import './Blog.css';
 
-
 class Blog extends Component {
     constructor(props) {
         super(props);
@@ -13,28 +12,27 @@ class Blog extends Component {
                 "BlogText": "Blog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text Data",
                 "BlogId": "f4920fd7-8a2a-4ba3-9e8e-6cdad75c7141"
             },
-            comments:[]
-        }
+            comments: []
+        };
+        this.addCommentHandler = this.addCommentHandler.bind(this);
     }
 
     render() {
-        let commentData = { "comment": "This is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from commentThis is from comment" };
         return (
             <div >
                 <div className="BlogBody">
                     <h1>UnsafeCloud Blog</h1>
                     <div className="BlogText" >{this.state.Blog.BlogText} </div>
                     <div>
-                        <AddComment {...this.props} />
+                        <AddComment {...this.props} comments={this.state.comments} commentCallBack={this.addCommentHandler} parentId={this.state.Blog.BlogId} blogId={this.state.Blog.BlogId} />
                     </div>
                     <div className="CommentsHeader">
                         <b>Comments</b>
                     </div>
                     {this.state.comments.map((comment, i) => {
-                        debugger;
-                        if (comment.parentId) {
-                           return( <div className="CommentContent">
-                                <Comment blog={this.state.Blog} comments={this.state.comments} comment={comment} />
+                        if (comment.parentId === this.state.Blog.BlogId) {
+                            return (<div key={comment._id} className="CommentContent">
+                                <Comment key={comment._id} blog={this.state.Blog} commentCallBack={this.addCommentHandler} comments={this.state.comments} comment={comment} />
                             </div>)
                         }
                     })}
@@ -43,14 +41,24 @@ class Blog extends Component {
         );
     }
 
+    addCommentHandler(comment) {
+        debugger;
+
+        if(this.state)
+        {
+            this.setState({ comments: [ ...this.state.comments, comment ] });
+        }        
+    }
+
     componentDidMount() {
-        fetch(Constants.commentAPI, {
+        fetch(Constants.basecommentAPI, {
             method: 'GET', headers: {
                 'Content-Type': 'application/json',
             }
         })
             .then(response => response.json())
             .then(data => {
+                debugger;
                 this.setState({ comments: data });
             });
     }
