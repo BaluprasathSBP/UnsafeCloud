@@ -1,4 +1,4 @@
 import React from 'react';
 
 // Comment APIs
-export const basecommentAPI = "http://localhost:32779/comment/";
+export const basecommentAPI = "http://localhost:3000/comments/";

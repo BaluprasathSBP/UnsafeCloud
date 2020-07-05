@@ -9,7 +9,7 @@ class Blog extends Component {
         super(props);
         this.state = {
             Blog: {
-                "BlogText": "Blog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text DataBlog Text Data",
+                "BlogText": "Microsoft has built one of the top five publicly disclosed supercomputers in the world, making new infrastructure available in Azure to train extremely large artificial intelligence models, the company is announcing at its Build developers conference.\n  Built in collaboration with and exclusively for OpenAI, the supercomputer hosted in Azure was designed specifically to train that company’s AI models. It represents a key milestone in a partnership announced last year to jointly create new supercomputing technologies in Azure. \n  It’s also a first step toward making the next generation of very large AI models and the infrastructure needed to train them available as a platform for other organizations and developers to build upon.",
                 "BlogId": "f4920fd7-8a2a-4ba3-9e8e-6cdad75c7141"
             },
             comments: []

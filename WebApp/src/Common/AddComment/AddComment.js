@@ -11,7 +11,7 @@ class AddComment extends Component {
         this.state = {
             opened: false,
             newComment: '',
-            commentText: 'AddComment'
+            commentText: 'Add Comment'
         };
         this.handleChange = this.handleChange.bind(this);
         this.SaveCommentClick = this.SaveCommentClick.bind(this);
@@ -31,7 +31,6 @@ class AddComment extends Component {
                 </div> : <div></div>}
             </div>
         );
-
     }
 
     AddCommentClick() {
