@@ -7,6 +7,9 @@ const commentRouter = express.Router()
 commentRouter.get('/parent', async (req, res, next) => {
     try {
         var parentId = req.query.parentId;
+        if (!parentId) {
+            res.status(400).json("Invalid parentId");
+        }
         res.status(200).json(await getCommentsByParentId(parentId));
     }
     catch (err) {
@@ -28,7 +31,7 @@ commentRouter.get('/', async (req, res, next) => {
 
 // Add new comment
 commentRouter.post('/', async (req, res, next) => {
-    try {       
+    try {
         var comment = req.body;
         if (!(comment && comment.blogId && comment.parentId && comment.comment)) {
             res.status(400).json("Please validate the input content");

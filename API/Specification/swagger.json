@@ -8,19 +8,18 @@
       "email": "prasath.balu13@gmail.com"
     }
   },
-  "host": "petstore.swagger.io",
-  "basePath": "/v2",
+  "host": "localhost:3000",
   "tags": [
     {
       "name": "comment",
-      "description": "Everything about blog comments"
+      "description": "Blog Comments"
     }
   ],
   "schemes": [
     "http"
   ],
   "paths": {
-    "/comment": {
+    "/comments": {
       "post": {
         "tags": [
           "comment"
@@ -39,7 +38,7 @@
             "description": "Success"
           },
           "400": {
-            "description": "Invalid input"
+            "description": "Please validate the input content"
           }
         }
       },
@@ -47,7 +46,34 @@
         "tags": [
           "comment"
         ],
-        "summary": "Finds comment by parent id",
+        "summary": "Get all comments",
+        "description": "Comments will be provided based on the parent Id",
+        "operationId": "GetComments",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Comment"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parentId"
+          }
+        }
+      }
+    },
+    "/comments/parent": {
+      "get": {
+        "tags": [
+          "comment"
+        ],
+        "summary": "Find all the comments by parent id",
         "description": "Commnents will be provided based on the parent Id",
         "operationId": "findcommentById",
         "produces": [
@@ -83,20 +109,20 @@
     "Comment": {
       "type": "object",
       "properties": {
-        "id": {
+        "_id": {
           "type": "string",
-          "format": "guid"
+          "format": "objectId"
         },
         "comment": {
           "type": "string"
         },
         "parentId": {
           "type": "string",
-          "format": "guid"
+          "format": "objectId"
         },
         "blogId": {
           "type": "string",
-          "format": "guid"
+          "format": "objectId"
         },
         "whenCreated": {
           "type": "string",
@@ -106,13 +132,11 @@
     },
     "ApiResponse": {
       "type": "object",
+      "description": "For Internal server error",
       "properties": {
-        "code": {
+        "status": {
           "type": "integer",
           "format": "int32"
-        },
-        "type": {
-          "type": "string"
         },
         "message": {
           "type": "string"

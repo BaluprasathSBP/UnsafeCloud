@@ -9,9 +9,8 @@ const morgan = require('morgan');
 const { startDatabase } = require('./DB/mongodb');
 const { insertComment, getComments } = require('./Service/comment');
 var swaggerUi = require('swagger-ui-express'),
-  swaggerDocument = require('./Specification/swagger.json');
+swaggerDocument = require('./Specification/swagger.json');
 const commentAPI = require('./Controllers/Comment/comment');
-var methodOverride = require('method-override')
 
 const PORT = 3000;
 const HOST = '0.0.0.0';
@@ -37,18 +36,18 @@ app.use(morgan('combined'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Register routers
-app.use('/comment', commentAPI);
+app.use('/comments', commentAPI);
 
 
 // Intital API
 app.get('/', function (req, res) {
-  debugger;
   res.send('You are in the Unsafecloud comments API');
 });
 
 // start the in-memory MongoDB instance
 startDatabase().then(async () => {
-  await insertComment({ comment: 'Hello, now from the in-memory database!', parentId: 'eadf-ghtere121kj-j212kjk', blogId: 'eadf-ghtere121kj-j212kjk' });
+  // await insertComment({ comment: 'Hello, now from the in-memory database!', parentId: 'eadf-ghtere121kj-j212kjk', blogId: 'eadf-ghtere121kj-j212kjk' });
+  // Global error handler
   const handleErrors = (err, req, res, next) => {
     return res.status(500).json({
       status: 'error',
