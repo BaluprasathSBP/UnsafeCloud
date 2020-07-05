@@ -8,6 +8,7 @@ React Js application for accessing and adding comments
 API :
 Node Js and Express JS API application which uses in-memory Mongo DB for comments manipulation
 
+![picture](Images/APISpecification.png)
 
 
 Deliverables:
